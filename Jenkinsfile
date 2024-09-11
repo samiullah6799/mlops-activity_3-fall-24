@@ -30,8 +30,10 @@ pipeline {
 
 def void deploy(String branchName) {
     if (branchName == 'dev') {
+        println("Deploying to dev environment")
+    } else if (branchName == 'stage') {
         println("Deploying to stage environment")
     } else {
-        println("Deploying to other environment")
+        println("Deploying to prod environment")
     }
 }
