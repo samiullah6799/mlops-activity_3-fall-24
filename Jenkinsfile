@@ -9,7 +9,7 @@ pipeline {
 
         stage('Installing Dependencies') {
             steps {
-                sh 'pip3 install -r requirements.txt'
+                sh 'make install'
             }
         }
 
@@ -18,7 +18,7 @@ pipeline {
                 sh 'make test'
                 script {
                     def branchName = "${env.BRANCH_NAME}"
-                    echo 'branchName'
+                    echo "BRANCH NAME: ${branchName}"
                 }
             }
         }
