@@ -3,25 +3,28 @@ pipeline {
     stages {
         stage ('checkout') {
             steps {
-                echo 'Checkout Repo'
+                checkout scmGit(branches: [[name: '*/dev']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/samiullah6799/mlops-activity_3-fall-24.git/']])
             }
         }
 
         stage ('Build') {
             steps {
-                echo 'Installing Dependencies'
+                sh 'make install'
             }
         }
 
         stage ('Testing') {
             steps {
-                echo 'Testing'
+                sh 'python3 test.py'
             }
         }
 
         stage ('Deploy') {
             steps {
-                echo 'Deploying'
+                script {
+                    def branchName = "${env.BRANCH_NAME}"
+                    println("BRANCH NAME : ${branchName}")
+                }
             }
         }
     }
