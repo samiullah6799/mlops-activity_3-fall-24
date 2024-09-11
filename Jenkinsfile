@@ -21,8 +21,17 @@ pipeline {
                 script {
                     def branchName = "${env.BRANCH_NAME}"
                     echo "BRANCH NAME: ${branchName}"
+                    deploy(branchName)
                 }
             }
         }
+    }
+}
+
+def void deploy(String branchName) {
+    if (branchName == 'dev') {
+        println("Deploying to stage environment")
+    } else {
+        println("Deploying to other environment")
     }
 }
