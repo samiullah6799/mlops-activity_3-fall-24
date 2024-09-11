@@ -9,13 +9,15 @@ pipeline {
 
         stage('Installing Dependencies') {
             steps {
+                sh 'source venv/bin/activate'
                 sh 'make install'
             }
         }
 
         stage('Testing') {
             steps {
-                sh 'make test'
+                sh 'source venv/bin/activate'
+                sh 'python3 test.py'
                 script {
                     def branchName = "${env.BRANCH_NAME}"
                     echo "BRANCH NAME: ${branchName}"
