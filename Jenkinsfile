@@ -1,39 +1,28 @@
 pipeline {
     agent any
     stages {
-        stage('checkout') {
+        stage ('checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/dev']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/samiullah6799/mlops-activity_3-fall-24.git/']])
+                echo 'Checkout Repo'
             }
         }
 
-        stage('Installing Dependencies') {
+        stage ('Build') {
             steps {
-                sh 'source venv/bin/activate'
-                sh 'make install'
+                echo 'Installing Dependencies'
             }
         }
 
-        stage('Testing') {
+        stage ('Testing') {
             steps {
-                sh 'source venv/bin/activate'
-                sh 'python3 test.py'
-                script {
-                    def branchName = "${env.BRANCH_NAME}"
-                    echo "BRANCH NAME: ${branchName}"
-                    deploy(branchName)
-                }
+                echo 'Testing'
             }
         }
-    }
-}
 
-def void deploy(String branchName) {
-    if (branchName == 'dev') {
-        println("Deploying to dev environment")
-    } else if (branchName == 'stage') {
-        println("Deploying to stage environment")
-    } else {
-        println("Deploying to prod environment")
+        stage ('Deploy') {
+            steps {
+                echo 'Deploying'
+            }
+        }
     }
 }
