@@ -16,8 +16,10 @@ pipeline {
         stage('Testing') {
             steps {
                 sh 'make test'
-                def branchName = "${env.BRANCH_NAME}"
-                echo 'branchName'
+                script {
+                    def branchName = "${env.BRANCH_NAME}"
+                    echo 'branchName'
+                }
             }
         }
     }
