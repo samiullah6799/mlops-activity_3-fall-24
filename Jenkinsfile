@@ -12,5 +12,13 @@ pipeline {
                 sh 'pip3 install -r requirements.txt'
             }
         }
+
+        stage('Testing') {
+            steps {
+                sh 'make test'
+                def branchName = "${env.BRANCH_NAME}"
+                echo 'branchName'
+            }
+        }
     }
 }
