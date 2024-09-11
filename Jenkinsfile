@@ -24,6 +24,7 @@ pipeline {
                 script {
                     def branchName = "${env.BRANCH_NAME}"
                     println("BRANCH NAME : ${branchName}")
+                    println("MLOps Batch 21")
                 }
             }
         }
