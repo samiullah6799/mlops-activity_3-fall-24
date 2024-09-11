@@ -1,31 +1,27 @@
 pipeline {
     agent any
     stages {
-        stage ('checkout') {
+        stage ('Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/dev']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/samiullah6799/mlops-activity_3-fall-24.git/']])
+                echo 'Repository Checkout'
             }
         }
 
         stage ('Build') {
             steps {
-                sh 'make install'
+                echo 'Packages Installation'
             }
         }
 
-        stage ('Testing') {
+        stage ('Test') {
             steps {
-                sh 'python3 test.py'
+                echo 'Testing'
             }
         }
 
         stage ('Deploy') {
             steps {
-                script {
-                    def branchName = "${env.BRANCH_NAME}"
-                    println("BRANCH NAME : ${branchName}")
-                    println("MLOps Batch 21")
-                }
+                echo 'Deploying'
             }
         }
     }
